@@ -36,6 +36,7 @@ def stats(stats):
 
 
 def main():
+
     print(parse_name(get_page(address)))
     stats(parse_stat(get_page(address)))
 
