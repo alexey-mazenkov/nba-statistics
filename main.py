@@ -58,7 +58,7 @@ def output(name, ATT, COMP, YDS, TD, INT, PR):
             outp.write('Interceptions: ')
         else:
             outp.write('Passer rating: ')
-            outp.write(str(all_stats[i]) + '\n')
+        outp.write(str(all_stats[i]) + '\n')
 
     outp.close()
 
