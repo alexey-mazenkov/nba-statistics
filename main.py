@@ -26,11 +26,11 @@ def parse_stat(page):
 
 
 def stats(stats):
-    COMP = stats[0]
-    ATT = stats[1]
-    YDS = stats[3].replace(',', '')
-    TD = stats[5]
-    INT = stats[6]
+    COMP = float(stats[0])
+    ATT = float(stats[1])
+    YDS = float(stats[3].replace(',', ''))
+    TD = float(stats[5])
+    INT = float(stats[6])
     a = (COMP / ATT - 0.3) * 5
     b = (YDS / ATT - 3) * 0.25
     c = (TD / ATT) * 20
@@ -58,7 +58,7 @@ def output(name, ATT, COMP, YDS, TD, INT, PR):
             outp.write('Interceptions: ')
         else:
             outp.write('Passer rating: ')
-        outp.write(str(all_stats[i]) + '\n')
+            outp.write(str(all_stats[i]) + '\n')
 
     outp.close()
 
