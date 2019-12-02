@@ -2,8 +2,6 @@
 
 import urllib.request as ur
 
-address = 'http://www.nfl.com/player/brycepetty/2552369/profile'
-
 
 def get_page(url):
     f = ur.urlopen(url)
@@ -26,11 +24,11 @@ def parse_stat(page):
 
 
 def stats(stats):
-    COMP = float(stats[0])
-    ATT = float(stats[1])
+    COMP = float(stats[0].replace(',', ''))
+    ATT = float(stats[1].replace(',', ''))
     YDS = float(stats[3].replace(',', ''))
-    TD = float(stats[5])
-    INT = float(stats[6])
+    TD = float(stats[5].replace(',', ''))
+    INT = float(stats[6].replace(',', ''))
     a = (COMP / ATT - 0.3) * 5
     b = (YDS / ATT - 3) * 0.25
     c = (TD / ATT) * 20
@@ -62,9 +60,13 @@ def output(name, ATT, COMP, YDS, TD, INT, PR):
 
 
 def main():
+    
+    with open('players.txt', 'r') as players:
+        for i in players:
+            address = players.readline()
 
-    print(parse_name(get_page(address)))
-    print(stats(parse_stat(get_page(address))))
+            print(parse_name(get_page(address)))
+            print(stats(parse_stat(get_page(address))))
 
 
 main()
