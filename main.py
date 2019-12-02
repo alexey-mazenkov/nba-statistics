@@ -35,9 +35,32 @@ def stats(stats):
     b = (YDS / ATT - 3) * 0.25
     c = (TD / ATT) * 20
     d = 2.375 - (INT / ATT * 25)
-    passer_rating = ((a + b + c + d) / 6) * 100
+    PR = format((((a + b + c + d) / 6) * 100), '.2f')
 
-    print(COMP, ATT, YDS, TD, INT, passer_rating)
+    print(COMP, ATT, YDS, TD, INT, PR)
+
+
+def output(name, ATT, COMP, YDS, TD, INT, PR):
+    all_stats = [name, ATT, COMP, YDS, TD, INT, PR]
+    outp = open('output.txt', 'a')
+    for i in range(len(all_stats)):
+        if i == 0:
+            outp.write('Player name: ')
+        elif i == 1:
+            outp.write('Number of passing attempts: ')
+        elif i == 2:
+            outp.write('Number of completions: ')
+        elif i == 3:
+            outp.write('Passing yards: ')
+        elif i == 4:
+            outp.write('Touchdown passes: ')
+        elif i == 5:
+            outp.write('Interceptions: ')
+        else:
+            outp.write('Passer rating: ')
+        outp.write(str(all_stats[i]) + '\n')
+
+    outp.close()
 
 
 def main():
