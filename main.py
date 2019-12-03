@@ -23,7 +23,7 @@ def parse_stat(page):
     return stat.split()
 
 
-def stats(stats):
+def stats(stats, name):
     COMP = float(stats[0].replace(',', ''))
     ATT = float(stats[1].replace(',', ''))
     YDS = float(stats[3].replace(',', ''))
@@ -34,11 +34,6 @@ def stats(stats):
     c = (TD / ATT) * 20
     d = 2.375 - (INT / ATT * 25)
     PR = format((((a + b + c + d) / 6) * 100), '.2f')
-
-    return ATT, COMP, YDS, TD, INT, PR
-
-
-def output(name, ATT, COMP, YDS, TD, INT, PR):
     all_stats = [name, ATT, COMP, YDS, TD, INT, PR]
     with open('output.txt', 'a') as outp:
         for i in range(len(all_stats)):
@@ -57,16 +52,13 @@ def output(name, ATT, COMP, YDS, TD, INT, PR):
             else:
                 outp.write('Passer rating: ')
             outp.write(str(all_stats[i]) + '\n')
+        outp.write('\n')
 
 
 def main():
-    
     with open('players.txt', 'r') as players:
         for i in players:
-            address = players.readline()
-
-            print(parse_name(get_page(address)))
-            print(stats(parse_stat(get_page(address))))
+            stats(parse_stat(get_page(i)), parse_name(get_page(i)))
 
 
 main()
